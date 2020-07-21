@@ -147,7 +147,7 @@ main {
  <div class="container">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">タスク管理</a>
+  <a class="navbar-brand" href="index.jsp">タスク管理</a>
 
   <!-- Collapse button -->
   <div class="animated-icon">
@@ -166,11 +166,11 @@ main {
    <!-- InstanceBeginEditable name="navLink" -->
    <ul class="navbar-nav mr-auto">
     <li class="nav-item active hoverlink"><a class="nav-link"
-     href="index.html">Home <span class="sr-only">(current)</span></a></li>
+     href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
     <li class="nav-item hoverlink"><a class="nav-link"
-     href="committee.html">タスク追加</a></li>
+     href="add.jsp">タスク追加</a></li>
     <li class="nav-item hoverlink"><a class="nav-link"
-     href="culture.html">カテゴリー</a></li>
+     href="category.jsp">カテゴリー</a></li>
 
    </ul>
    <!-- InstanceEndEditable -->
