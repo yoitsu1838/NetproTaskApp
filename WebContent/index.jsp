@@ -1,9 +1,10 @@
-<%@ page import="java.sql.*" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.*" language="java"
+ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.DateFormat"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,18 +12,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JAVA Server Page(JSP) - PostgreSQL JDBC Test</title>
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet"
+ href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link
+ href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+ rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
+<link
+ href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
+ rel="stylesheet">
 <style type="text/css">
 main {
-	min-height: calc(100vh - 130px);
+ min-height: calc(100vh - 130px);
 }
-
 /* toggleAnimation*/
 .animated-icon {
     width: 30px;
@@ -131,202 +137,203 @@ main {
     width: 100%;
 }
 </style>
-
 </head>
 <body>
-  <!--Main Navigation-->
-  <header>
+ <!--Main Navigation-->
+ <header>
+ <!--Navbar-->
+ <nav class="navbar navbar-expand-lg navbar-dark unique-color">
+ <!-- Additional container -->
+ <div class="container">
 
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark unique-color">
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="#">タスク管理</a>
 
-      <!-- Additional container -->
-      <div class="container">
+  <!-- Collapse button -->
+  <div class="animated-icon">
+   <button class="navbar-toggler cross-button" type="button"
+    data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span></span><span></span><span></span><span></span>
+   </button>
+  </div>
 
-        <!-- Navbar brand -->
-        <a class="navbar-brand" href="#">タスク管理</a>
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
 
-        <!-- Collapse button -->
-        <div class="animated-icon">
-          <button class="navbar-toggler cross-button" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span><span></span><span></span><span></span> </button>
-        </div>
+   <!-- Links -->
+   <!-- InstanceBeginEditable name="navLink" -->
+   <ul class="navbar-nav mr-auto">
+    <li class="nav-item active hoverlink"><a class="nav-link"
+     href="index.html">Home <span class="sr-only">(current)</span></a></li>
+    <li class="nav-item hoverlink"><a class="nav-link"
+     href="committee.html">タスク追加</a></li>
+    <li class="nav-item hoverlink"><a class="nav-link"
+     href="culture.html">カテゴリー</a></li>
 
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="basicExampleNav">
+   </ul>
+   <!-- InstanceEndEditable -->
+   <!-- Links -->
 
-          <!-- Links -->
-          <!-- InstanceBeginEditable name="navLink" -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active hoverlink"> <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
-            <li class="nav-item hoverlink"> <a class="nav-link" href="committee.html">タスク追加</a></li>
-            <li class="nav-item hoverlink"> <a class="nav-link" href="culture.html">カテゴリー</a></li>
+  </div>
+  <!-- Collapsible content -->
 
-          </ul>
-          <!-- InstanceEndEditable -->
-          <!-- Links -->
+ </div>
+ <!-- Additional container -->
+ </nav>
 
-        </div>
-        <!-- Collapsible content -->
-
-      </div>
-      <!-- Additional container -->
-
-    </nav>
-    <!--/.Navbar-->
-
+ <!--/.Navbar-->
   </header>
-  <!--// Main Navigation-->
+ <!--// Main Navigation-->
 
-<%! String todayTask; %>
-<%! ArrayList<String> taskName = new ArrayList<String>();%>
-<%!	ArrayList<String> category = new ArrayList<String>();%>
-<%!	ArrayList<String> deadline = new ArrayList<String>();%>
-<%!	ArrayList<String> done = new ArrayList<String>();%>
-<%!ArrayList<String> hide = new ArrayList<String>();%>
-<%
-
+ <%!String todayTask;%>
+ <%!ArrayList<String> taskName = new ArrayList<String>();%>
+ <%!ArrayList<String> category = new ArrayList<String>();%>
+ <%!ArrayList<String> deadline = new ArrayList<String>();%>
+ <%!ArrayList<String> done = new ArrayList<String>();%>
+ <%!ArrayList<String> hide = new ArrayList<String>();%>
+ <%
   try {
 
- //今日締切のタスク関係
- Date date=new Date();
- DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
- String todayDate=dateFormat.format(date);
- todayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
-    // PostgreSQL JDBC 接続
+  //今日締切のタスク関係
+  Date date = new Date();
+  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  String todayDate = dateFormat.format(date);
+  todayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
+  // PostgreSQL JDBC 接続
 
-    String driverClassName = "org.postgresql.Driver";
-    String url = "jdbc:postgresql://localhost/task";
-    String user = "dbpuser";      // ここはユーザ名
-    String password = "hogehoge"; // ここはパスワード
-    Connection connection;
-    Statement statement;
-    ResultSet resultSet;
-    String sql = "SELECT * FROM task";
+  String driverClassName = "org.postgresql.Driver";
+  String url = "jdbc:postgresql://localhost/task";
+  String user = "dbpuser"; // ここはユーザ名
+  String password = "hogehoge"; // ここはパスワード
+  Connection connection;
+  Statement statement;
+  ResultSet resultSet;
+  String sql = "SELECT * FROM task";
 
+  // PostgreSQL JDBC ドライバロード
+  Class.forName(driverClassName);
 
-    // PostgreSQL JDBC ドライバロード
-    Class.forName(driverClassName);
+  connection = DriverManager.getConnection(url, user, password);
 
-    connection = DriverManager.getConnection(url, user, password);
+  // PostgreSQL JDBC 問い合わせ SQL 作成
+  statement = connection.createStatement();
 
-    // PostgreSQL JDBC 問い合わせ SQL 作成
-    statement = connection.createStatement();
+  // PostgreSQL JDBC レコードセットオープン
+  resultSet = statement.executeQuery(sql);
 
-    // PostgreSQL JDBC レコードセットオープン
-    resultSet = statement.executeQuery(sql);
-
-    out.println("<table border=\"1\">");
-
-    out.println("<tr><th>タスク名</th><th>カテゴリ</th><th>締切日</th><th>done</th><th>hide</th></tr>");
-
-    // PostgreSQL JDBC レコードセットリード
-    while (resultSet.next()) {
-      taskName.add(resultSet.getString("taskName"));
-      category.add(resultSet.getString("category"));
-      deadline.add(resultSet.getString("deadline"));
-      done.add(resultSet.getString("done"));
-      hide.add(resultSet.getString("hide"));
-
-
-    }
-    for(int i = 0; i<taskName.size(); i++){
-    	if(deadline.equals(todayDate)){
-    	       todayTask = taskName.get(i);
-    	      }
-    }
-
-    out.println("</table>");
-
-    // PostgreSQL JDBC レコードセットクローズ
-    resultSet.close();
-
-    // PostgreSQL JDBC ステートメントクローズ
-    statement.close();
-
-    // PostgreSQL JDBC 接続クローズ
-    connection.close();
-
-
+  // PostgreSQL JDBC レコードセットリード
+  while (resultSet.next()) {
+   taskName.add(resultSet.getString("taskName"));
+   category.add(resultSet.getString("category"));
+   deadline.add(resultSet.getString("deadline"));
+   done.add(resultSet.getString("done"));
+   hide.add(resultSet.getString("hide"));
 
   }
-  catch (Exception e) {
-    // エラー処理
-    out.println(e);
+  for (int i = 0; i < taskName.size(); i++) {
+   if (deadline.equals(todayDate)) {
+  todayTask = taskName.get(i);
+   }
   }
 
-%>
+  // PostgreSQL JDBC レコードセットクローズ
+  resultSet.close();
 
-<hr>
-  <!--Main layout-->
-  <main class="mt-5">
-    <!--Main container-->
-    <div class="container">
-      <!--Grid row-->
-      <div class="row">
+  // PostgreSQL JDBC ステートメントクローズ
+  statement.close();
 
-        <!--Grid column-->
-        <div class="col-lg-12 col-md-12 mb-4">
-          <h2>今日締め切りのタスク</h2>
-          <hr>
-          <p><% out.print(todayTask); %>
-          </p>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
-	  <!--Grid row-->
-      <div class="row">
+  // PostgreSQL JDBC 接続クローズ
+  connection.close();
 
-      <!--Grid column-->
-        <div class="col-lg-12 col-md-12 mb-4">
-      <h2>タスク一覧</h2>
-      <hr>
-      </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
+ } catch (Exception e) {
+  // エラー処理
+  out.println(e);
+ }
+ %>
 
-      <!--Grid row-->
-      <div class="row">
-        <!--繰り返し単位-->
-        <%int index = 0;
-        for(String name:taskName){
-        	 out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content--><div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text--><p class=\"card-text\"><span class=\"category\">カテゴリー："+category.get(index)+"</span><br><span class=\"deadline\">締切："+deadline.get(index)+"</span></p><a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
-        index++;
-        }
-        taskName.clear();%>
-        <!--//繰り返し単位-->
+ <!--Main layout-->
+ <main class="mt-5"> <!--Main container-->
+ <div class="container">
+  <!--Grid row-->
+  <div class="row">
 
-      </div>
-      <!--Grid row-->
+   <!--Grid column-->
+   <div class="col-lg-12 col-md-12 mb-4">
+    <h2>今日締め切りのタスク</h2>
+    <hr>
+    <p>
+     <%
+      out.print(todayTask);
+     %>
+    </p>
+   </div>
+   <!--Grid column-->
+  </div>
+  <!--Grid row-->
+  <!--Grid row-->
+  <div class="row">
 
-    </div>
-    <!--Main container-->
-  </main>
-  <!--Main layout-->
+   <!--Grid column-->
+   <div class="col-lg-12 col-md-12 mb-4">
+    <h2>タスク一覧</h2>
+    <hr>
+   </div>
+   <!--Grid column-->
+  </div>
+  <!--Grid row-->
+
+  <!--Grid row-->
+  <div class="row">
+   <!--繰り返し単位-->
+   <%
+    int index = 0;
+   for (String name : taskName) {
+    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
+    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
+    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
+    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
+    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+    index++;
+   }
+   taskName.clear();
+   %>
+   <!--//繰り返し単位-->
+
+  </div>
+  <!--Grid row-->
+
+ </div>
+ <!--Main container--> </main>
+ <!--Main layout-->
 
 
 
-    <!-- Footer -->
-  <footer class="page-footer font-small indigo pt-4 mt-4 unique-color">
+ <!-- Footer -->
+ <footer class="page-footer font-small indigo pt-4 mt-4 unique-color">
 
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 <a href="#" target="_blank"> NETPRO</a> </div>
-    <!-- Copyright -->
+ <!-- Copyright -->
+ <div class="footer-copyright text-center py-3">
+  © 2020 <a href="#" target="_blank"> NETPRO</a>
+ </div>
+ <!-- Copyright --> </footer>
+ <!-- //Footer -->
 
-  </footer>
-  <!-- //Footer -->
-
-<!-- JQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
-<script type="text/javascript">
+ <!-- JQuery -->
+ <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <!-- Bootstrap tooltips -->
+ <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+ <!-- Bootstrap core JavaScript -->
+ <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <!-- MDB core JavaScript -->
+ <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
+ <script type="text/javascript">
 
 /*nav_button*/
 $(document).ready(function () {
@@ -339,5 +346,6 @@ $(document).ready(function () {
 });
 
 </script>
+
 </body>
 </html>
