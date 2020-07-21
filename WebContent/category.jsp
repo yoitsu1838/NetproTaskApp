@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>タスク管理</title>
+<title>category-タスク管理</title>
 <!-- Font Awesome -->
 <link rel="stylesheet"
  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -190,6 +190,7 @@ main {
  <%!String todayTask;%>
  <%!ArrayList<String> taskName = new ArrayList<String>();%>
  <%!ArrayList<String> category = new ArrayList<String>();%>
+ <%!ArrayList<String> categoryList = new ArrayList<String>();%>
  <%!ArrayList<String> deadline = new ArrayList<String>();%>
  <%!ArrayList<String> done = new ArrayList<String>();%>
  <%!ArrayList<String> hide = new ArrayList<String>();%>
@@ -210,7 +211,10 @@ main {
   Connection connection;
   Statement statement;
   ResultSet resultSet;
-  String sql = "SELECT * FROM task";
+  ResultSet resultSetOfCategory;
+  String sql  = "SELECT * FROM task";
+  String sql2 = "SELECT DISTINCT category FROM task";
+
 
   // PostgreSQL JDBC ドライバロード
   Class.forName(driverClassName);
@@ -237,9 +241,22 @@ main {
   todayTask = taskName.get(i);
    }
   }
-
   // PostgreSQL JDBC レコードセットクローズ
   resultSet.close();
+//PostgreSQL JDBC ステートメントクローズ
+ statement.close();
+
+
+ statement = connection.createStatement();
+
+ resultSetOfCategory = statement.executeQuery(sql2);
+
+  while (resultSetOfCategory.next()) {
+	   categoryList.add(resultSetOfCategory.getString("category"));
+
+	  }
+  // PostgreSQL JDBC レコードセットクローズ
+  resultSetOfCategory.close();
 
   // PostgreSQL JDBC ステートメントクローズ
   statement.close();
@@ -261,11 +278,13 @@ main {
 
    <!--Grid column-->
    <div class="col-lg-12 col-md-12 mb-4">
-    <h2>今日締め切りのタスク</h2>
+    <h2>カテゴリ一覧</h2>
     <hr>
     <p>
      <%
-      out.print(todayTask);
+     for(String catename:categoryList){
+    	 out.print("<a href=\"#" + catename + "\" >" + catename + "</a><br>");
+     }
      %>
     </p>
    </div>
@@ -273,35 +292,37 @@ main {
   </div>
   <!--Grid row-->
   <!--Grid row-->
-  <div class="row">
-
-   <!--Grid column-->
-   <div class="col-lg-12 col-md-12 mb-4">
-    <h2>タスク一覧</h2>
-    <hr>
-   </div>
-   <!--Grid column-->
-  </div>
-  <!--Grid row-->
-
-  <!--Grid row-->
-  <div class="row">
    <!--繰り返し単位-->
    <%
-    int index = 0;
+   for(String catename:categoryList){
+	   out.print("<div class=\"row\">"+
+   "<!--Grid column-->"+
+   "<div class=\"col-lg-12 col-md-12 mb-4\">"+
+    "<h2 id=\""+catename+"\">"+catename+"</h2><hr>"+
+   "</div>"+
+   "<!--Grid column-->"+
+  "</div>"+
+  "<!--Grid row-->"+
+  "<!--Grid row-->"+
+  "<div class=\"row\">");
+
+   int index = 0;
    for (String name : taskName) {
+	   if(category.get(index).equals(catename)){
     out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
     "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
     "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
     "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
     "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+	   }
     index++;
    }
+  out.print("</div>");
+   }
+   categoryList.clear();
    taskName.clear();
-   %>
+  %>
    <!--//繰り返し単位-->
-
-  </div>
   <!--Grid row-->
 
  </div>
