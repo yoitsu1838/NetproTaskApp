@@ -238,11 +238,6 @@ main {
    hide.add(resultSet.getString("hide"));
 
   }
-  for (int i = 0; i < taskName.size(); i++) {
-   if (deadline.equals(todayDate)) {
-  todayTask = taskName.get(i);
-   }
-  }
   // PostgreSQL JDBC レコードセットクローズ
   resultSet.close();
 //PostgreSQL JDBC ステートメントクローズ
