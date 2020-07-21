@@ -1,5 +1,5 @@
 <%@ page import="java.sql.*" language="java"
- contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.DateFormat"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -10,198 +10,200 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>category-タスク管理</title>
+<title>カテゴリ-タスク管理</title>
 <!-- Font Awesome -->
 <link rel="stylesheet"
- href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
 <link rel="stylesheet"
- href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <!-- Bootstrap core CSS -->
 <link
- href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
- rel="stylesheet">
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link
- href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
- rel="stylesheet">
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
+	rel="stylesheet">
 <style type="text/css">
 main {
- min-height: calc(100vh - 130px);
+	min-height: calc(100vh - 130px);
 }
 /* toggleAnimation*/
 .animated-icon {
-    width: 30px;
-    height: 20px;
-    position: relative;
-    margin: 0px;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-    cursor: pointer;
+	width: 30px;
+	height: 20px;
+	position: relative;
+	margin: 0px;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	-o-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	cursor: pointer;
 }
+
 .animated-icon span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+	display: block;
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	border-radius: 9px;
+	opacity: 1;
+	left: 0;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: .25s ease-in-out;
+	-moz-transition: .25s ease-in-out;
+	-o-transition: .25s ease-in-out;
+	transition: .25s ease-in-out;
 }
+
 .animated-icon span {
-    background: #e3f2fd;
+	background: #e3f2fd;
 }
+
 .animated-icon span:nth-child(1) {
-    top: 0px;
+	top: 0px;
 }
+
 .animated-icon span:nth-child(2), .animated-icon span:nth-child(3) {
-    top: 10px;
+	top: 10px;
 }
+
 .animated-icon span:nth-child(4) {
-    top: 20px;
+	top: 20px;
 }
+
 .animated-icon.open span:nth-child(1) {
-    top: 11px;
-    width: 0%;
-    left: 50%;
+	top: 11px;
+	width: 0%;
+	left: 50%;
 }
+
 .animated-icon.open span:nth-child(2) {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
+
 .animated-icon.open span:nth-child(3) {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
+
 .animated-icon.open span:nth-child(4) {
-    top: 11px;
-    width: 0%;
-    left: 50%;
+	top: 11px;
+	width: 0%;
+	left: 50%;
 }
 /* //toggleAnimation*/
 /* video iframe */
 .video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 75%;
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-top: 75%;
 }
+
 .video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 /* nav hovercolor*/
 .hoverlink a {
-    position: relative;
-    display: inline-block;
-    transition: .3s;
+	position: relative;
+	display: inline-block;
+	transition: .3s;
 }
+
 .hoverlink a::before, .hoverlink a::after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 1px;
-    background-color: #1C2331;
-    transition: .3s;
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 1px;
+	background-color: #1C2331;
+	transition: .3s;
 }
+
 .hoverlink a::before {
-    top: 0;
-    left: 0;
+	top: 0;
+	left: 0;
 }
+
 .hoverlink a::after {
-    bottom: 0;
-    right: 0;
+	bottom: 0;
+	right: 0;
 }
+
 .hoverlink a:hover::before, .hoverlink a:hover::after {
-    width: 100%;
+	width: 100%;
 }
 </style>
 </head>
 <body>
- <!--Main Navigation-->
- <header>
- <!--Navbar-->
- <nav class="navbar navbar-expand-lg navbar-dark unique-color">
- <!-- Additional container -->
- <div class="container">
+	<!--Main Navigation-->
+	<header> <!--Navbar--> <nav
+		class="navbar navbar-expand-lg navbar-dark unique-color"> <!-- Additional container -->
+	<div class="container">
 
-  <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">タスク管理</a>
+		<!-- Navbar brand -->
+		<a class="navbar-brand" href="index.jsp">タスク管理</a>
 
-  <!-- Collapse button -->
-  <div class="animated-icon">
-   <button class="navbar-toggler cross-button" type="button"
-    data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span></span><span></span><span></span><span></span>
-   </button>
-  </div>
+		<!-- Collapse button -->
+		<div class="animated-icon">
+			<button class="navbar-toggler cross-button" type="button"
+				data-toggle="collapse" data-target="#basicExampleNav"
+				aria-controls="basicExampleNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span></span><span></span><span></span><span></span>
+			</button>
+		</div>
 
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse" id="basicExampleNav">
 
-   <!-- Links -->
-   <!-- InstanceBeginEditable name="navLink" -->
-   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active hoverlink"><a class="nav-link"
-     href="index.html">Home <span class="sr-only">(current)</span></a></li>
-    <li class="nav-item hoverlink"><a class="nav-link"
-     href="committee.html">タスク追加</a></li>
-    <li class="nav-item hoverlink"><a class="nav-link"
-     href="culture.html">カテゴリー</a></li>
+			<!-- Links -->
+			<!-- InstanceBeginEditable name="navLink" -->
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item hoverlink"><a class="nav-link"
+					href="index.jsp">Home </a></li>
+				<li class="nav-item hoverlink"><a class="nav-link"
+					href="add.jsp">タスク追加</a></li>
+				<li class="nav-item active hoverlink"><a class="nav-link"
+					href="category.jsp">カテゴリー<span class="sr-only">(current)</span></a></li>
 
-   </ul>
-   <!-- InstanceEndEditable -->
-   <!-- Links -->
+			</ul>
+			<!-- InstanceEndEditable -->
+			<!-- Links -->
 
-  </div>
-  <!-- Collapsible content -->
+		</div>
+		<!-- Collapsible content -->
 
- </div>
- <!-- Additional container -->
- </nav>
+	</div>
+	<!-- Additional container --> </nav> <!--/.Navbar--> </header>
+	<!--// Main Navigation-->
 
- <!--/.Navbar-->
-  </header>
- <!--// Main Navigation-->
-
- <%!String todayTask;%>
- <%!ArrayList<String> taskName = new ArrayList<String>();%>
- <%!ArrayList<String> category = new ArrayList<String>();%>
- <%!ArrayList<String> categoryList = new ArrayList<String>();%>
- <%!ArrayList<String> deadline = new ArrayList<String>();%>
- <%!ArrayList<String> done = new ArrayList<String>();%>
- <%!ArrayList<String> hide = new ArrayList<String>();%>
- <%
+	<%!String todayTask;%>
+	<%!ArrayList<String> taskName = new ArrayList<String>();%>
+	<%!ArrayList<String> category = new ArrayList<String>();%>
+	<%!ArrayList<String> categoryList = new ArrayList<String>();%>
+	<%!ArrayList<String> deadline = new ArrayList<String>();%>
+	<%!ArrayList<String> done = new ArrayList<String>();%>
+	<%!ArrayList<String> hide = new ArrayList<String>();%>
+	<%
   try {
-
-  //今日締切のタスク関係
-  Date date = new Date();
-  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-  String todayDate = dateFormat.format(date);
-  todayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
   // PostgreSQL JDBC 接続
 
   String driverClassName = "org.postgresql.Driver";
@@ -270,30 +272,30 @@ main {
  }
  %>
 
- <!--Main layout-->
- <main class="mt-5"> <!--Main container-->
- <div class="container">
-  <!--Grid row-->
-  <div class="row">
+	<!--Main layout-->
+	<main class="mt-5"> <!--Main container-->
+	<div class="container">
+		<!--Grid row-->
+		<div class="row">
 
-   <!--Grid column-->
-   <div class="col-lg-12 col-md-12 mb-4">
-    <h2>カテゴリ一覧</h2>
-    <hr>
-    <p>
-     <%
+			<!--Grid column-->
+			<div class="col-lg-12 col-md-12 mb-4">
+				<h2>カテゴリ一覧</h2>
+				<hr>
+				<p>
+					<%
      for(String catename:categoryList){
     	 out.print("<a href=\"#" + catename + "\" >" + catename + "</a><br>");
      }
      %>
-    </p>
-   </div>
-   <!--Grid column-->
-  </div>
-  <!--Grid row-->
-  <!--Grid row-->
-   <!--繰り返し単位-->
-   <%
+				</p>
+			</div>
+			<!--Grid column-->
+		</div>
+		<!--Grid row-->
+		<!--Grid row-->
+		<!--繰り返し単位-->
+		<%
    for(String catename:categoryList){
 	   out.print("<div class=\"row\">"+
    "<!--Grid column-->"+
@@ -322,39 +324,39 @@ main {
    categoryList.clear();
    taskName.clear();
   %>
-   <!--//繰り返し単位-->
-  <!--Grid row-->
+		<!--//繰り返し単位-->
+		<!--Grid row-->
 
- </div>
- <!--Main container--> </main>
- <!--Main layout-->
-
-
-
- <!-- Footer -->
- <footer class="page-footer font-small indigo pt-4 mt-4 unique-color">
+	</div>
+	<!--Main container--> </main>
+	<!--Main layout-->
 
 
- <!-- Copyright -->
- <div class="footer-copyright text-center py-3">
-  © 2020 <a href="#" target="_blank"> NETPRO</a>
- </div>
- <!-- Copyright --> </footer>
- <!-- //Footer -->
 
- <!-- JQuery -->
- <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <!-- Bootstrap tooltips -->
- <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
- <!-- Bootstrap core JavaScript -->
- <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
- <!-- MDB core JavaScript -->
- <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
- <script type="text/javascript">
+	<!-- Footer -->
+	<footer class="page-footer font-small indigo pt-4 mt-4 unique-color">
+
+
+	<!-- Copyright -->
+	<div class="footer-copyright text-center py-3">
+		© 2020 <a href="#" target="_blank"> NETPRO</a>
+	</div>
+	<!-- Copyright --> </footer>
+	<!-- //Footer -->
+
+	<!-- JQuery -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
+	<script type="text/javascript">
 
 /*nav_button*/
 $(document).ready(function () {
