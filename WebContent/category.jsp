@@ -214,7 +214,7 @@ main {
   Statement statement;
   ResultSet resultSet;
   ResultSet resultSetOfCategory;
-  String sql  = "SELECT * FROM task";
+  String sql  = "SELECT * FROM task ORDER BY deadline ASC";
   String sql2 = "SELECT DISTINCT category FROM task";
 
 
