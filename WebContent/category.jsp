@@ -25,7 +25,6 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/lightwindow.css">
 <style type="text/css">
 main {
 	min-height: calc(100vh - 130px);
@@ -314,7 +313,7 @@ main {
 	    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
 	    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
 	    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
-	    "<a href=\"taskEditer?cid=show&taskid="+taskid.get(index)+"\" class=\"btn btn-sm btn-indigo lightwindow\">変更・削除</a></div></div><!--/.Card--></div>");
+	    "<a href=\"#\" onclick=\"window.open('./taskEditer?cid=show&taskid="+taskid.get(index)+"', '', 'width=450,height=200'); return false;\" class=\"btn btn-sm btn-indigo\" data-toggle=\"modal\" >変更・削除</a></div></div><!--/.Card--></div>");
 		   }
 	    index++;
 	   }
@@ -372,9 +371,6 @@ $(document).ready(function () {
 });
 
 </script>
-<!-- JavaScript -->
-<script type="text/javascript" src="js/prototype.js"></script>
-<script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="js/lightwindow.js"></script>
+
 </body>
 </html>
