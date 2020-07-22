@@ -261,7 +261,7 @@ main {
 
    <!--Grid column-->
    <div class="col-lg-12 col-md-12 mb-4">
-    <h2>今日締め切りのタスク</h2>
+    <h2>今日〆切タスク</h2>
     <hr>
     <p>
      <%
@@ -277,6 +277,7 @@ main {
 
    <!--Grid column-->
    <div class="col-lg-12 col-md-12 mb-4">
+   <br>
     <h2>タスク一覧</h2>
     <hr>
    </div>
@@ -290,17 +291,51 @@ main {
    <%
     int index = 0;
    for (String name : taskName) {
+	   if(done.get(index).equals("f")){//未達成タスク
     out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
     "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
     "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
     "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
     "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+	   }
+    index++;
+   }
+   %>
+   <!--//繰り返し単位-->
+  </div>
+  <!--Grid row-->
+
+
+  <!--Grid row-->
+  <div class="row">
+   <!--Grid column-->
+   <div class="col-lg-12 col-md-12 mb-4">
+   <br>
+    <h2>完了済タスク</h2>
+    <hr>
+   </div>
+   <!--Grid column-->
+  </div>
+  <!--Grid row-->
+
+  <!--Grid row-->
+  <div class="row">
+   <!--繰り返し単位-->
+   <%
+   index = 0;
+   for (String name : taskName) {
+	   if(done.get(index).equals("t")){//完了済タスク
+    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
+    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
+    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
+    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
+    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+	   }
     index++;
    }
    taskName.clear();
    %>
    <!--//繰り返し単位-->
-
   </div>
   <!--Grid row-->
 
