@@ -210,7 +210,7 @@ main {
   Connection connection;
   Statement statement;
   ResultSet resultSet;
-  String sql = "SELECT * FROM task";
+  String sql = "SELECT * FROM task ORDER BY deadline ASC";
 
   // PostgreSQL JDBC ドライバロード
   Class.forName(driverClassName);
