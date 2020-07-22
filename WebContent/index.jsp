@@ -187,7 +187,8 @@ main {
   </header>
  <!--// Main Navigation-->
 
- <%!String todayTask;%>
+ <%!String noTodayTask;%>
+ <%!ArrayList<String> todayTask = new ArrayList<String>();%>
  <%!ArrayList<String> taskName = new ArrayList<String>();%>
  <%!ArrayList<String> category = new ArrayList<String>();%>
  <%!ArrayList<String> deadline = new ArrayList<String>();%>
@@ -200,7 +201,7 @@ main {
   Date date = new Date();
   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
   String todayDate = dateFormat.format(date);
-  todayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
+  noTodayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
   // PostgreSQL JDBC 接続
 
   String driverClassName = "org.postgresql.Driver";
@@ -231,11 +232,12 @@ main {
    done.add(resultSet.getString("done"));
    hide.add(resultSet.getString("hide"));
 
-  }
-  for (int i = 0; i < taskName.size(); i++) {
    if (deadline.equals(todayDate)) {
-  todayTask = taskName.get(i);
+  	todayTask.add(resultSet.getString("taskName"));
    }
+  }
+  if(todayTask.size()==0){
+	  todayTask.add(noTodayTask);
   }
 
   // PostgreSQL JDBC レコードセットクローズ
@@ -264,8 +266,9 @@ main {
     <h2>今日〆切タスク</h2>
     <hr>
     <p>
-     <%
-      out.print(todayTask);
+     <%for(String todaytask:todayTask){
+      out.print(todaytask);
+     }
      %>
     </p>
    </div>
