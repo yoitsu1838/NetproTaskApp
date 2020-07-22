@@ -25,6 +25,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="css/lightwindow.css">
 <style type="text/css">
 main {
 	min-height: calc(100vh - 130px);
@@ -202,6 +203,7 @@ main {
 	<%!ArrayList<String> deadline = new ArrayList<String>();%>
 	<%!ArrayList<String> done = new ArrayList<String>();%>
 	<%!ArrayList<String> hide = new ArrayList<String>();%>
+	<%!ArrayList<String> taskid = new ArrayList<String>();%>
 	<%
   try {
 
@@ -237,6 +239,7 @@ main {
    deadline.add(resultSet.getString("deadline"));
    done.add(resultSet.getString("done"));
    hide.add(resultSet.getString("hide"));
+   taskid.add(resultSet.getString("taskid"));
 
   }
   // PostgreSQL JDBC レコードセットクローズ
@@ -311,7 +314,7 @@ main {
 	    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
 	    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
 	    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
-	    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+	    "<a href=\"taskEditer?cid=show&taskid="+taskid.get(index)+"\" class=\"btn btn-sm btn-indigo lightwindow\">変更・削除</a></div></div><!--/.Card--></div>");
 		   }
 	    index++;
 	   }
@@ -368,6 +371,9 @@ $(document).ready(function () {
 });
 
 </script>
-
+<!-- JavaScript -->
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="js/lightwindow.js"></script>
 </body>
 </html>
