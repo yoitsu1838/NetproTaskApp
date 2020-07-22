@@ -340,6 +340,9 @@ main {
     index++;
    }
    taskName.clear();
+   category.clear();
+   deadline.clear();
+   done.clear();
    %>
    <!--//繰り返し単位-->
   </div>
