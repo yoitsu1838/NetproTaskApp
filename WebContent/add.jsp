@@ -101,7 +101,7 @@
   Connection connection;
   Statement statement;
   ResultSet resultSet;
-  String sql = "SELECT * FROM task ORDER BY deadline ASC";
+  String sql = "SELECT DISTINCT category FROM task";
 
   // PostgreSQL JDBC ドライバロード
   Class.forName(driverClassName);
