@@ -269,6 +269,7 @@ main {
      <%for(String todaytask:todayTask){
       out.print(todaytask + "<br>");
      }
+     todayTask.clear();
      %>
     </p>
    </div>
