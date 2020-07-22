@@ -4,9 +4,14 @@
 <%! int resultCode; %>
 <%
 //Todo SQLインジェクション対策
+//Todo データベースの正規化
  request.setCharacterEncoding("UTF-8");
  String name = request.getParameter("name");
  String category = request.getParameter("category");
+ String addCategory = request.getParameter("addCategory");
+ if(category.equals("addCat")){
+	 category = addCategory;
+ }
  String deadline = request.getParameter("deadline");
  String done = "false";
  String hide = "false";

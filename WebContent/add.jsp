@@ -147,6 +147,11 @@
     <h2>タスクの追加</h2>
     <hr>
     <p>このページでは，タスクの追加を行います。</p>
+
+
+
+
+
 		<form method="post" class="text-center border border-light p-5" action="./taskinsert.jsp">
 
 
@@ -155,20 +160,23 @@
 		    <input type="text" class="form-control mb-4" name="name" placeholder="タスク名" maxlength="120"  required="required">
 
 		    <!--  カテゴリー -->
-		    <label>カテゴリー</label>
-		    <select class="browser-default custom-select mb-4" name="category"  required="required">
+		    <p class="text-left" >カテゴリ</p>
+
+		    <select id="category" class="browser-default custom-select mb-4" name="category"  required="required">
 		        <%
 		        for(String category : categorys){
-
 			        out.print("<option value=\""+category+"\">" + category + "</option>" );
 		        }
 		        categorys.clear();
 		        %>
-
 		    </select>
+		    <p class="text-right" style="margin-top:-20px;"><a href="#"  data-toggle="modal" data-target="#image_Modal">新しいカテゴリー</a></p>
+
+
+
 
 		    <!-- 締切 -->
-		    <div class="date"><input type="text" id="picker" class="form-control mb-4" name="deadline" placeholder="クリックして選択"  required="required"></div>
+		    <div class="date"><input type="text" id="picker" class="form-control mb-4" name="deadline" placeholder="締切日選択"  required="required"></div>
 
 
 
@@ -200,6 +208,33 @@
  </div>
  <!-- Copyright --> </footer>
  <!-- //Footer -->
+
+
+
+ <!--  modal  -->
+     <div class="modal fade" id="image_Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg modal-middle">
+            <!-- //モーダルウィンドウの縦表示位置を調整・画像を大きく見せる -->
+            <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTitle">新しいカテゴリー</h5>
+
+                </div>
+                <div class="modal-body">
+                カテゴリーを追加すると選択肢の一番下に追加されます。
+                    <form id="form1" action="#">
+		    <input type="text" id="newCategory" class="form-control mb-4" name="newCategory" placeholder="新しいカテゴリー名" maxlength="12" required>
+			<input class="btn btn-primary btn-small" type="button" onclick="addOption()" value="追加" data-dismiss="modal">
+			</form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+ <!--  end_modal -->
 
  <!-- JQuery -->
  <script
@@ -240,6 +275,25 @@ $(document).ready(function () {
 });
 
 </script>
+
+<script type="text/javascript">
+  			function addOption() {
+  				//新しいカテゴリー名を取得
+  				var input_message = document.getElementById("newCategory").value;
+	  				if (input_message) {
+	  				 // selectタグを取得する
+	  				 var select = document.getElementById("category");
+	  				 // optionタグを作成する
+	  				 var option = document.createElement("option");
+	  				 // optionタグのテキストを4に設定する
+	  				 option.text = input_message;
+	  				 // optionタグのvalueを4に設定する
+	  				 option.value = input_message;
+	  				 // selectタグの子要素にoptionタグを追加する
+	  				 select.appendChild(option);
+	  				}
+  				}
+  			</script>
 
 </body>
 </html>
