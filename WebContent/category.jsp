@@ -204,6 +204,7 @@ main {
 	<%!ArrayList<String> hide = new ArrayList<String>();%>
 	<%
   try {
+
   // PostgreSQL JDBC 接続
 
   String driverClassName = "org.postgresql.Driver";
@@ -305,7 +306,7 @@ main {
 
 	   int index = 0;
 	   for (String name : taskName) {
-		   if(category.get(index).equals(catename)){
+		   if(category.get(index).equals(catename) && done.get(index).equals("f")){
 	    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
 	    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
 	    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
