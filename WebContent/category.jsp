@@ -291,34 +291,34 @@ main {
 		<!--Grid row-->
 		<!--繰り返し単位-->
 		<%
-   for(String catename:categoryList){
-	   out.print("<div class=\"row\">"+
-   "<!--Grid column-->"+
-   "<div class=\"col-lg-12 col-md-12 mb-4\">"+
-    "<h2 id=\""+catename+"\">"+catename+"</h2><hr>"+
-   "</div>"+
-   "<!--Grid column-->"+
-  "</div>"+
-  "<!--Grid row-->"+
-  "<!--Grid row-->"+
-  "<div class=\"row\">");
+	   for(String catename:categoryList){
+		   out.print("<br><div class=\"row\">"+
+	   "<!--Grid column-->"+
+	   "<div class=\"col-lg-12 col-md-12 mb-4\">"+
+	    "<h2 id=\""+catename+"\">"+catename+"</h2><hr>"+
+	   "</div>"+
+	   "<!--Grid column-->"+
+	  "</div>"+
+	  "<!--Grid row-->"+
+	  "<!--Grid row-->"+
+	  "<div class=\"row\">");
 
-   int index = 0;
-   for (String name : taskName) {
-	   if(category.get(index).equals(catename)){
-    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
-    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
-    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
-    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
-    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+	   int index = 0;
+	   for (String name : taskName) {
+		   if(category.get(index).equals(catename)){
+	    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
+	    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
+	    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
+	    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
+	    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+		   }
+	    index++;
 	   }
-    index++;
-   }
-  out.print("</div>");
-   }
-   categoryList.clear();
-   taskName.clear();
-  %>
+	  out.print("</div>");
+	   }
+	   categoryList.clear();
+	   taskName.clear();
+	  %>
 		<!--//繰り返し単位-->
 		<!--Grid row-->
 
