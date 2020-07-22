@@ -358,8 +358,6 @@ main {
  <!--Main container--> </main>
  <!--Main layout-->
 
-
-
  <!-- Footer -->
  <footer class="page-footer font-small indigo pt-4 mt-4 unique-color">
 
