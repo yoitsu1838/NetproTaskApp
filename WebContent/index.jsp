@@ -194,6 +194,7 @@ main {
  <%!ArrayList<String> deadline = new ArrayList<String>();%>
  <%!ArrayList<String> done = new ArrayList<String>();%>
  <%!ArrayList<String> hide = new ArrayList<String>();%>
+ <%!ArrayList<String> taskid = new ArrayList<String>();%>
  <%
   try {
 
@@ -231,6 +232,7 @@ main {
    deadline.add(resultSet.getString("deadline"));
    done.add(resultSet.getString("done"));
    hide.add(resultSet.getString("hide"));
+   taskid.add(resultSet.getString("taskid"));
 
    if (resultSet.getString("deadline").equals(todayDate)) {
   	todayTask.add(resultSet.getString("taskName"));
@@ -300,7 +302,7 @@ main {
     "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
     "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
     "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
-    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
+    "<a href=\"taskEditer?cid=show&taskid="+taskid.get(index)+"\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
 	   }
     index++;
    }
