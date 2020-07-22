@@ -232,7 +232,7 @@ main {
    done.add(resultSet.getString("done"));
    hide.add(resultSet.getString("hide"));
 
-   if (deadline.equals(todayDate)) {
+   if (resultSet.getString("deadline").equals(todayDate)) {
   	todayTask.add(resultSet.getString("taskName"));
    }
   }
@@ -267,7 +267,7 @@ main {
     <hr>
     <p>
      <%for(String todaytask:todayTask){
-      out.print(todaytask);
+      out.print(todaytask + "<br>");
      }
      %>
     </p>
