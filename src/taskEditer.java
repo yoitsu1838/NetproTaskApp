@@ -92,7 +92,7 @@ public class taskEditer extends HttpServlet {
 
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<html><head><title>DATABASE_CONTROL</title></head><body>");
+            out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title></head><body>");
 
             out.println("<h2>タスクの編集・削除</h2>");
 
@@ -153,7 +153,7 @@ public class taskEditer extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if (request.getParameter("taskid") == null) {
-            out.println("<html><head><title>DATABASE_CONTROL</title></head><body>");
+            out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title></head><body>");
             out.println("<p>該当データがありません。</p>");
 
             out.println("</body></html>");
@@ -171,7 +171,7 @@ public class taskEditer extends HttpServlet {
             deadline = resultSet.getString("deadline");
 
 
-            out.println("<html><head><title>DATABASE_CONTROL</title>");
+            out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title>");
             out.println("<script language=\"javascript\">");
             out.println("<!--");
             out.println("function del() {");
@@ -282,7 +282,7 @@ public class taskEditer extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        out.println("<html><head><title>DATABASE_CONTROL</title></head> <body>");
+        out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title></head> <body>");
         out.println("<p>処理を完了しました。</p>");
 
         out.println("</body></html>");
@@ -295,7 +295,7 @@ public class taskEditer extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        out.println("<html><head><title>DATABASE_CONTROL</title></head> <body>");
+        out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title></head> <body>");
         out.println("<h2>エラーが発生しました。</h2>");
         out.println("<br><br>");
         out.println("</body></html>");
@@ -307,7 +307,7 @@ public class taskEditer extends HttpServlet {
 	try {
 	    response.setContentType("text/html; charset=UTF-8");
 	    PrintWriter out = response.getWriter();
-	    out.println("<html><head><title>DATABASE_CONTROL</title></head><body>");
+	    out.println("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" ><title>DATABASE_CONTROL</title></head><body>");
 	    out.println(e.getMessage()+"<br>");
 	    out.println("</body></html>");
 	    out.close();
