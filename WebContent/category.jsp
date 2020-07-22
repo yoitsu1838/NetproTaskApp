@@ -325,6 +325,7 @@ main {
 	   category.clear();
 	   deadline.clear();
 	   done.clear();
+	   taskid.clear();
 	  %>
 		<!--//繰り返し単位-->
 		<!--Grid row-->
