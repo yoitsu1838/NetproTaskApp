@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>タスク管理</title>
+<title>タスクの追加 - タスク管理</title>
 <!-- Font Awesome -->
 <link rel="stylesheet"
  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -25,118 +25,13 @@
 <link
  href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
  rel="stylesheet">
-<style type="text/css">
-main {
- min-height: calc(100vh - 130px);
-}
-/* toggleAnimation*/
-.animated-icon {
-    width: 30px;
-    height: 20px;
-    position: relative;
-    margin: 0px;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-    cursor: pointer;
-}
-.animated-icon span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
-}
-.animated-icon span {
-    background: #e3f2fd;
-}
-.animated-icon span:nth-child(1) {
-    top: 0px;
-}
-.animated-icon span:nth-child(2), .animated-icon span:nth-child(3) {
-    top: 10px;
-}
-.animated-icon span:nth-child(4) {
-    top: 20px;
-}
-.animated-icon.open span:nth-child(1) {
-    top: 11px;
-    width: 0%;
-    left: 50%;
-}
-.animated-icon.open span:nth-child(2) {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.animated-icon.open span:nth-child(3) {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-.animated-icon.open span:nth-child(4) {
-    top: 11px;
-    width: 0%;
-    left: 50%;
-}
-/* //toggleAnimation*/
-/* video iframe */
-.video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 75%;
-}
-.video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-/* nav hovercolor*/
-.hoverlink a {
-    position: relative;
-    display: inline-block;
-    transition: .3s;
-}
-.hoverlink a::before, .hoverlink a::after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 1px;
-    background-color: #1C2331;
-    transition: .3s;
-}
-.hoverlink a::before {
-    top: 0;
-    left: 0;
-}
-.hoverlink a::after {
-    bottom: 0;
-    right: 0;
-}
-.hoverlink a:hover::before, .hoverlink a:hover::after {
-    width: 100%;
-}
-</style>
+
+<!--  for date picker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+ <link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
  <!--Main Navigation-->
@@ -165,10 +60,10 @@ main {
    <!-- Links -->
    <!-- InstanceBeginEditable name="navLink" -->
    <ul class="navbar-nav mr-auto">
-    <li class="nav-item active hoverlink"><a class="nav-link"
-     href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
     <li class="nav-item hoverlink"><a class="nav-link"
-     href="add.jsp">タスク追加</a></li>
+     href="index.jsp">Home</a></li>
+    <li class="nav-item active hoverlink"><a class="nav-link"
+     href="add.jsp">タスク追加 <span class="sr-only">(current)</span></a></li>
     <li class="nav-item hoverlink"><a class="nav-link"
      href="category.jsp">カテゴリー</a></li>
 
@@ -188,11 +83,8 @@ main {
  <!--// Main Navigation-->
 
  <%!String todayTask;%>
- <%!ArrayList<String> taskName = new ArrayList<String>();%>
- <%!ArrayList<String> category = new ArrayList<String>();%>
- <%!ArrayList<String> deadline = new ArrayList<String>();%>
- <%!ArrayList<String> done = new ArrayList<String>();%>
- <%!ArrayList<String> hide = new ArrayList<String>();%>
+ <%!ArrayList<String> categorys = new ArrayList<String>();%>
+
  <%
   try {
 
@@ -200,7 +92,6 @@ main {
   Date date = new Date();
   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
   String todayDate = dateFormat.format(date);
-  todayTask = "<span class=\"todayTask none\">今日締め切りのタスクはありません。</span>";
   // PostgreSQL JDBC 接続
 
   String driverClassName = "org.postgresql.Driver";
@@ -225,18 +116,9 @@ main {
 
   // PostgreSQL JDBC レコードセットリード
   while (resultSet.next()) {
-   taskName.add(resultSet.getString("taskName"));
-   category.add(resultSet.getString("category"));
-   deadline.add(resultSet.getString("deadline"));
-   done.add(resultSet.getString("done"));
-   hide.add(resultSet.getString("hide"));
+   categorys.add(resultSet.getString("category"));
+  }
 
-  }
-  for (int i = 0; i < taskName.size(); i++) {
-   if (deadline.equals(todayDate)) {
-  todayTask = taskName.get(i);
-   }
-  }
 
   // PostgreSQL JDBC レコードセットクローズ
   resultSet.close();
@@ -253,6 +135,7 @@ main {
  }
  %>
 
+
  <!--Main layout-->
  <main class="mt-5"> <!--Main container-->
  <div class="container">
@@ -261,48 +144,45 @@ main {
 
    <!--Grid column-->
    <div class="col-lg-12 col-md-12 mb-4">
-    <h2>今日締め切りのタスク</h2>
+    <h2>タスクの追加</h2>
     <hr>
-    <p>
-     <%
-      out.print(todayTask);
-     %>
-    </p>
+    <p>このページでは，タスクの追加を行います。</p>
+		<form method="post" class="text-center border border-light p-5" action="./taskinsert.jsp">
+
+
+
+		    <!-- タスク名 -->
+		    <input type="text" class="form-control mb-4" name="name" placeholder="タスク名" maxlength="120"  required="required">
+
+		    <!--  カテゴリー -->
+		    <label>カテゴリー</label>
+		    <select class="browser-default custom-select mb-4" name="category"  required="required">
+		        <%
+		        for(String category : categorys){
+
+			        out.print("<option value=\""+category+"\">" + category + "</option>" );
+		        }
+		        categorys.clear();
+		        %>
+
+		    </select>
+
+		    <!-- 締切 -->
+		    <div class="date"><input type="text" id="picker" class="form-control mb-4" name="deadline" placeholder="クリックして選択"  required="required"></div>
+
+
+
+		    <!-- submit -->
+		    <button class="btn btn-info btn-block" type="submit">タスクを追加</button>
+
+
+		</form>
+
    </div>
    <!--Grid column-->
   </div>
   <!--Grid row-->
-  <!--Grid row-->
-  <div class="row">
 
-   <!--Grid column-->
-   <div class="col-lg-12 col-md-12 mb-4">
-    <h2>タスク一覧</h2>
-    <hr>
-   </div>
-   <!--Grid column-->
-  </div>
-  <!--Grid row-->
-
-  <!--Grid row-->
-  <div class="row">
-   <!--繰り返し単位-->
-   <%
-    int index = 0;
-   for (String name : taskName) {
-    out.print("<div class=\"col-lg-4 col-md-12 mb-4\"><!--Card--><div class=\"card\"><!--Card content-->" +
-    "<div class=\"card-body\"><!--Title--><h4 class=\"card-title\">" + name + "</h4><!--Text-->" +
-    "<p class=\"card-text\"><span class=\"category\">カテゴリー：" + category.get(index) + "</span><br>" +
-    "<span class=\"deadline\">締切：" + deadline.get(index) + "</span></p>" +
-    "<a href=\"committee.html\" class=\"btn btn-sm btn-indigo\">変更・削除</a></div></div><!--/.Card--></div>");
-    index++;
-   }
-   taskName.clear();
-   %>
-   <!--//繰り返し単位-->
-
-  </div>
-  <!--Grid row-->
 
  </div>
  <!--Main container--> </main>
@@ -333,7 +213,12 @@ main {
  <!-- MDB core JavaScript -->
  <script
   src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
- <script type="text/javascript">
+
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.min.js"></script>
+
+
+  <script type="text/javascript">
 
 /*nav_button*/
 $(document).ready(function () {
@@ -343,6 +228,15 @@ $(document).ready(function () {
         $('.animated-icon').toggleClass('open');
     });
 
+
+    //2.2
+    $(function(){
+    	$("#picker").bootstrapMaterialDatePicker({
+    	weekStart:0,
+    	format:"YYYY-MM-DD",
+    	time:false
+    	});
+    });
 });
 
 </script>
