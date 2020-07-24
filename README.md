@@ -7,7 +7,7 @@ tomcat+jsp+servletで動作するタスク管理ツールです。
 データベース:PostgreSQL 12<br>
 
 ## DEMO
-herokuでデモを設置しています。恐らくすぐ消します。<br>
+herokuでデモを設置しています。セキュリティ対策が不完全なためすぐ消します。<br>
 https://netpro-sample.herokuapp.com/index.jsp
 
 ### 役割分担について
