@@ -13,4 +13,4 @@ https://netpro-sample.herokuapp.com/index.jsp
 ### 役割分担について
 index.jsp / category.jsp nn48<br>
 add.jsp / taskinsert.jsp / taskEditer.java yoitsu1838<br>
-※スマートフォンの表示最適化のために，すべてのjspにyoitsu1838が同一コードの追記等の編集をしています。<br>
+※スマートフォンの表示最適化のために，すべてのjspにyoitsu1838が同一コードの追記等の編集をしています。CSSは，yoitsu1838が編集し，yoitsu1838が作成したhttps://tbc1010.com/clubinfo/archive/　を一部流用しています。<br>
